@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}FIX Message Formatter{% endblock %}
+
+{% block heading %}FIX Message Formatter{% endblock %}
+
+{% block content %}
+    <form method="post">
+        <label for="message">Enter FIX Message:</label>
+        <input type="message" name="message" id="message">
+        <button type="submit">Submit</button>
+    </form>
+    {% if raw_message %}
+        <div class="form-group">
+          <label for="example-textarea">Output</label>
+          <textarea class="form-control" id="example-textarea" rows="3" readonly>
+            {{ raw_message }}
+          </textarea>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-striped table-sm">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Field</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for row in fix_data %}
+                    {% if row[0] %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ row[0] }}</td>
+                            <td>{{ row[1] }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+              </tbody>
+        </table>
+    {% endif %}
+{% endblock %}
+
+
